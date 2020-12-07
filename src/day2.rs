@@ -7,14 +7,17 @@ pub fn main() -> Result {
     for line in input.lines() {
         let split = line.split('-').collect::<Vec<&str>>();
         let rest = split[1].split(' ').collect::<Vec<&str>>();
-        let min = split[0].parse::<i32>()?;
-        let max = rest[0].parse::<i32>()?;
-        let letter = rest[1].trim_end_matches(':');
-        let password = rest[2];
+        let first = split[0].parse::<usize>()?;
+        let second = rest[0].parse::<usize>()?;
+        let letter = rest[1].trim_end_matches(':').parse()?;
+        let password = rest[2].chars().collect::<Vec<char>>();
 
-        let occurences = password.matches(letter).count() as i32;
-
-        if occurences >= min && occurences <= max {
+        if password[first - 1] == letter {
+            if password[second - 1] != letter {
+                valid += 1;
+            }
+        }
+        else if password[second - 1] == letter {
             valid += 1;
         }
     }
