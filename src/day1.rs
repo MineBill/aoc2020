@@ -1,4 +1,6 @@
-pub fn main() -> Result<(), Box<dyn std::error::Error>> {
+use crate::Result;
+
+pub fn main() -> Result {
     let input = std::fs::read_to_string("data/day1.txt")?;
 
     let nums = input.lines().map(|s| s.parse::<i32>().unwrap()).collect::<Vec<i32>>();
